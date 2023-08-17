@@ -1,7 +1,7 @@
-<img align="left" src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Urban_Dictionary_logo.svg" alt="drawing" width="150" style="margin-right: 20px;"/>
+<img align="left" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Gray_book.png" alt="drawing" width="150" style="margin-right: 20px;"/>
 
-# Urban Dictionary Client
-This is a straightforward client written in Kotlin, designed to navigate and query the https://urbandictionary.com API. The API allows users to search for definitions on urban words from the Urban Dictionary database.
+# Dictionary Client
+This is a straightforward client written in Kotlin, designed to navigate and query the https://api.dictionaryapi.dev/ API. The API allows users to search for definitions on English words from their database.
 
 ---
 
@@ -17,24 +17,24 @@ You can include jitpack in your pom.xml by using the following code:
 </repository>
 ```
 
-Then add this Urban Dictionary Library to your project!
+Then add this Dictionary Library to your project!
 
 ```xml
 <dependency>
     <groupId>com.github.official-wizard</groupId>
-    <artifactId>urban-dictionary</artifactId>
+    <artifactId>english-dictionary</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
 ---
 
 # Usage
-To begin, access the static instance of the Client/API to access Urban Dictionary!
+To begin, access the static instance of the Client/API to access the Dictionary!
 
 ## Access instance
 ```kotlin
 // api access
-val api = UrbanDictionaryClient.api
+val api = DictionaryClient.api
 ```
 
 ---
@@ -45,8 +45,8 @@ Search for a list of definitions given a term!
 ### Example
 ```kotlin
 
-// your Urban Dictionary instance
-val api = UrbanDictionaryClient.api
+// your Dictionary instance
+val api = DictionaryClient.api
 
 // search for issues by series name
 val definitionRequest = api.define(term = "boop").execute()
@@ -63,16 +63,22 @@ if (definitionResult == null) {
     return
 }
 
-val availableDefinitions = definitionResult.list
+val availableDefinitions = definitionResult
 
 // no results were returned
 if (availableDefinitions.isEmpty()) {
     // handle no definitions being available by the given term
+    // there are some error messages in [definitionResult] as-well!
     return
 }
 
 val firstDefinitionItem = availableDefinitions.first()
-val firstDefinition = firstDefinitionItem.definition
+val meanings = firstDefinitionItem.meaning
+if (meanings.isEmpty()) {
+    // no meanings/definitions found!
+    return
+}
 
-println(firstDefinition)
+val firstMeaningFirstDefinition = meanings.first().definitions.first()
+println(firstMeaningFirstDefinition.definition)
 ```

@@ -1,4 +1,4 @@
-package com.urbandictionary
+package com.dictionary
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
