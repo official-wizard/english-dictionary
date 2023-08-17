@@ -9,8 +9,9 @@ data class Definitions (
     val resolution: String? = null
 ): ArrayList<Definitions.Meta>() {
     data class Meta(
+        val word: String,
         val phonetics: List<Phonetic>,
-        val meaning: List<Meaning>?,
+        val meanings: List<Meaning>?,
         val license: License?,
         val sourceUrls: List<String>
     ) {
