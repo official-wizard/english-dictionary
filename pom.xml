@@ -6,7 +6,7 @@
 
     <artifactId>english-dictionary</artifactId>
     <groupId>com.dictionary</groupId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>english-dictionary</name>
